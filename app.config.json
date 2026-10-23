@@ -1,14 +1,20 @@
 {
   "$schema": "./.dt-app/app.config.schema.json",
-  "environmentUrl": "https://frr29977.apps.dynatrace.com/",
+  "environmentUrl": "",
   "app": {
-    "name": "permissionexplorer",
-    "version": "0.0.0",
-    "description": "A starting project with routing, fetching data, and charting",
+    "name": "User Permission Explorer",
+    "version": "0.8.2",
+    "description": "Explore user permissions and IAM policies using the Account Management API",
     "id": "my.permissionexplorer",
     "scopes": [
-      { "name": "storage:logs:read", "comment": "default template" },
-      { "name": "storage:buckets:read", "comment": "default template" }
+      {
+        "name": "app-settings:objects:read",
+        "comment": "Backend functions read the Account Management API connection settings"
+      },
+      {
+        "name": "davis-copilot:conversations:execute",
+        "comment": "Permission Assist chat asks Davis CoPilot to explain required permissions"
+      }
     ]
   }
 }

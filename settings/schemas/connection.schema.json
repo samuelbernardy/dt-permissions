@@ -1,0 +1,47 @@
+{
+  "$schema": "https://developer.dynatrace.com/docs-assets/schema_strict_apps.json",
+  "dynatrace": "1",
+  "schemaId": "connection",
+  "version": "1.0.0",
+  "displayName": "Account Management API connection",
+  "description": "OAuth client used by Permission Explorer to read users, groups and policies from the Dynatrace Account Management API.",
+  "multiObject": false,
+  "ordered": false,
+  "maturity": "GENERAL_AVAILABILITY",
+  "ownerBasedAccessControl": false,
+  "properties": {
+    "accountUuid": {
+      "displayName": "Account UUID",
+      "description": "Dynatrace account UUID, or the full urn:dtaccount:<uuid> shown on the OAuth client.",
+      "type": "text",
+      "default": "",
+      "nullable": false
+    },
+    "clientId": {
+      "displayName": "OAuth client ID",
+      "description": "Client ID (dt0s02.XXXX) of an OAuth client with account-idm-read, iam-policies-management and account-env-read scopes.",
+      "type": "text",
+      "default": "",
+      "nullable": false
+    },
+    "clientSecret": {
+      "displayName": "OAuth client secret",
+      "description": "Client secret. Stored write-only; only the app's backend functions can read it.",
+      "type": "secret",
+      "default": "",
+      "nullable": false
+    },
+    "tokenUrl": {
+      "displayName": "Token URL",
+      "type": "text",
+      "default": "https://sso.dynatrace.com/sso/oauth2/token",
+      "nullable": false
+    },
+    "apiBaseUrl": {
+      "displayName": "Account API base URL",
+      "type": "text",
+      "default": "https://api.dynatrace.com",
+      "nullable": false
+    }
+  }
+}

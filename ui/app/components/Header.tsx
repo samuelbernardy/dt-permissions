@@ -7,8 +7,11 @@ export const Header = () => {
     <AppHeader>
       <AppHeader.Navigation>
         <AppHeader.Logo as={Link} to="/" />
-        <AppHeader.NavigationItem as={Link} to="/data">
-          Explore Data
+        <AppHeader.NavigationItem as={Link} to="/">
+          User explorer
+        </AppHeader.NavigationItem>
+        <AppHeader.NavigationItem as={Link} to="/ad-mapping">
+          AD group mapping
         </AppHeader.NavigationItem>
       </AppHeader.Navigation>
     </AppHeader>
