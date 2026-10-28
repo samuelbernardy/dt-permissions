@@ -97,9 +97,25 @@ installing the app, open **Settings** in the tenant and fill in
 | `tokenUrl` | text | no | Defaults to `https://sso.dynatrace.com/sso/oauth2/token`. |
 | `apiBaseUrl` | text | no | Defaults to `https://api.dynatrace.com`. |
 
-**Do not commit or deploy real values as schema `default`s.** Defaults become
-the object's initial value and ship inside the app bundle. Keep `accountUuid`,
-`clientId` and `clientSecret` defaults empty and enter the values in Settings.
+**Pre-filling the values (optional).** You can type the account UUID, client ID
+and secret into the three `default` fields of `connection.schema.json` so the
+Settings object comes up pre-filled when the app is installed. A Git *clean
+filter* keeps those values out of commits: it blanks the three credential
+defaults whenever the file is staged, so the committed file is always complete
+and blank, while your working copy keeps its values. Nobody else needs to
+rebuild anything.
+
+The filter is declared in `.gitattributes` (committed) but its command lives in
+each clone's local Git config, so run this once per clone:
+
+```bash
+git config filter.pe-creds.clean "node -e \"let s='';process.stdin.on('data',d=>s+=d).on('end',()=>{const j=JSON.parse(s);for(const k of ['accountUuid','clientId','clientSecret'])j.properties[k].default='';process.stdout.write(JSON.stringify(j,null,2)+'\\\\n')})\""
+```
+
+Check it with `git add -n` / `git diff --cached`: the three defaults should be `""`.
+Defaults still ship inside the **deployed app bundle**, so use a dedicated,
+read-only OAuth client and rotate its secret if it is ever exposed. Leaving
+the defaults blank and entering the values in Settings avoids that entirely.
 
 If the object is incomplete, lookups fail with "Connection settings incomplete
 (missing: …)".
